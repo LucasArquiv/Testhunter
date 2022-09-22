@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "654db900-e63e-4cc0-9afa-ee0d5ec5c2a6",
+		"name": "Hunter API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23435401"
+	},
+	"item": [
+		{
+			"name": "Testes leads",
+			"item": [
+				{
+					"name": "Leads",
+					"item": [
+						{
+							"name": "Criar lead",
+							"item": [
+								{
+									"name": "Criar novo lead",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Criando Nome  aleatório\r",
+													"pm.variables.replaceIn('{{$randomFirstName}}')\r",
+													"// Criando SobreNome  aleatório\r",
+													" pm.variables.replaceIn('{{$randomFullName}}')\r",
+													" // Criando Um título de trabalho aleatório\r",
+													" pm.variables.replaceIn('{{$randomJobType}}')\r",
+													" // Criando Uma área de trabalho aleatória\r",
+													" pm.variables.replaceIn('{{$randomJobArea}}')\r",
+													" // Criando Um endereço de e-mail aleatório\r",
+													" pm.variables.replaceIn('{{$randomEmail}}')\r",
+													" // Criando Um nome de empresa aleatório\r",
+													" pm.variables.replaceIn('{{$randomCompanyName}}')\r",
+													" // Criando Um nome de domínio aleatório\r",
+													"pm.variables.replaceIn('{{$randomDomainName}}')\r",
+													"// Criando Id aleatório\r",
+													"pm.variables.replaceIn('{{$randomBankAccountBic}}')"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"first_name\": \"{{$randomFirstName}}\",\r\n  \"last_name\": \"{{$randomFullName}}\",\r\n  \"position\": \"{{$randomJobType}}\",\r\n  \"company\": \"{{$randomCompanyName}}\",\r\n  \"company_industry\": \"{{$randomJobArea}}\",\r\n  \"company_size\": \"201-500 employees\",\r\n  \"confidence_score\": 97,\r\n  \"website\": \"{{$randomDomainName}}\",\r\n  \"custom_attributes\": {\r\n    \"customer_id\": \"{{$randomBankAccountBic}}\"\r\n  }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}leads",
+											"host": [
+												"{{URL}}leads"
+											]
+										},
+										"description": "Enviar requisição POST assíncrona para criar novo lead.\n\nStatus esperado:\n\n\\*   Status code: 200, 201 ou 202;\n\\*   String 'Created' no status code do response;\n\\*   Tempo de execução menor 4 seg."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Recuperar lead específico",
+							"item": [
+								{
+									"name": "Lead específico",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads/{{idleads}}",
+											"host": [
+												"{{URL}}leads"
+											],
+											"path": [
+												"{{idleads}}"
+											]
+										},
+										"description": "Enviar requisição GET assíncrona para recuperar lead específico.\n\nStatus esperado:\n\n\\* Status code: 200;  \n\\* String 'OK' no response code;  \n\\* Tempo de execução menor 4 seg;\n\n\\* Valor da key 'id' do response boby deve ser igual ao id buscado."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Recuperar Todos os lead cadastrados",
+							"item": [
+								{
+									"name": "Recuperando leads",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads",
+											"host": [
+												"{{URL}}leads"
+											]
+										},
+										"description": "Enviar requisição GET assíncrona para recuperar leads.\n\nStatus esperados:\n\n\\*   Status code: 200;\n\\*   String 'OK' no response code;\n\\*   Tempo de execução menor 4 seg."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Edição de leads",
+							"item": [
+								{
+									"name": "editar lead",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Criando Nome Aleatorio\r",
+													"pm.variables.replaceIn('{{$randomFirstName}}')\r",
+													"// Criando SobreNome aleatorio\r",
+													" pm.variables.replaceIn('{{$randomFullName}}')\r",
+													" // Criando Um título de trabalho aleatório\r",
+													" pm.variables.replaceIn('{{$randomJobType}}')\r",
+													" // Criando Uma área de trabalho aleatória\r",
+													" pm.variables.replaceIn('{{$randomJobArea}}')\r",
+													" // Criando Um endereço de e-mail aleatório\r",
+													" pm.variables.replaceIn('{{$randomEmail}}')\r",
+													" // Criando Um nome de empresa aleatório\r",
+													" pm.variables.replaceIn('{{$randomCompanyName}}')"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"first_name\": \"{{$randomFirstName}}\",\r\n  \"last_name\": \"{{$randomFullName}}\",\r\n  \"position\": \"{{$randomJobType}}\",\r\n  \"company\": \"{{$randomCompanyName}}\",\r\n  \"company_industry\": \"{{$randomJobArea}}\",\r\n  \"company_size\": \"201-500 employees\",\r\n  \"confidence_score\": 97,\r\n  \"website\": \"{{$randomDomainName}}\",\r\n  \"custom_attributes\": {\r\n    \"customer_id\": \"{{$randomBankAccountBic}}\"\r\n  }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}leads/{{idleads}}",
+											"host": [
+												"{{URL}}leads"
+											],
+											"path": [
+												"{{idleads}}"
+											]
+										},
+										"description": "Enviar requisição PUT assíncrona para alterar lead\n\nstatus esperados:\n\n\\* status code 204;  \n\\* String 'No Content' no response code."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Excluir leads",
+							"item": [
+								{
+									"name": "Excluir lead especifico",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads/{{idleads}}",
+											"host": [
+												"{{URL}}leads"
+											],
+											"path": [
+												"{{idleads}}"
+											]
+										},
+										"description": "Enviar requisição DELETE assíncrona para deletar lead específico.\n\nStatus esperados:\n\n\\* Status code 204;  \n\\* String 'No Content' no response code."
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Lista de leads",
+					"item": [
+						{
+							"name": "Criar listas de leads",
+							"item": [
+								{
+									"name": "Criando lista de lead",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Criando Um bordão aleatório\r",
+													"pm.variables.replaceIn('{{$randomCatchPhrase}}')"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"{{$randomCatchPhrase}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}leads_lists",
+											"host": [
+												"{{URL}}leads_lists"
+											]
+										},
+										"description": "Enviar requisição POST assíncrona para criar nova lista de lead.\n\nStatus esperados:\n\n\\*   Status code: 200, 201 ou 202;\n\\*   String 'Created' no status code do response;\n\\*   Tempo de execução de menos 4 seg."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Recuperar lista de leads específica",
+							"item": [
+								{
+									"name": "Lista específica de lead",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads_lists/{{idleadlist}}",
+											"host": [
+												"{{URL}}leads_lists"
+											],
+											"path": [
+												"{{idleadlist}}"
+											]
+										},
+										"description": "Enviar requisição GET assíncrona para recuperar lista de leads específica.\n\nStatus esperados:\n\n\\* Status code: 200;  \n\\* String 'OK' no response code;  \n\\* Tempo de execução menor 4 seg;\n\n\\*   Valor da key 'id' do response boby deve ser igual ao id buscado."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Recuperaçao de listas de leads cadastradas",
+							"item": [
+								{
+									"name": "Recuperação de lista de lead",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads_lists",
+											"host": [
+												"{{URL}}leads_lists"
+											]
+										},
+										"description": "Enviar requisição GET assíncrona para recuperar todas lista de leads.\n\nStatus esperados:\n\n\\*   Status code: 200;\n\\*   String 'OK' no status code do response;\n\\*   Tempo de execução de menos 4 seg."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Editar  lista de lead",
+							"item": [
+								{
+									"name": "Alterar lista lead",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Criando Um bordão aleatório\r",
+													"pm.variables.replaceIn('{{$randomCatchPhrase}}')"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"{{$randomCatchPhrase}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}leads_lists/{{idleadlist}}",
+											"host": [
+												"{{URL}}leads_lists"
+											],
+											"path": [
+												"{{idleadlist}}"
+											]
+										},
+										"description": "Enviar requisição PUT assíncrona para alterar lista de lead.\n\nStatus esperado:\n\n\\*   Status code: 204;\n\\*   String 'No Content' no response code."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Excluir lista de lead",
+							"item": [
+								{
+									"name": "Deltando lista de leads",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}leads_lists/{{idleadlist}}",
+											"host": [
+												"{{URL}}leads_lists"
+											],
+											"path": [
+												"{{idleadlist}}"
+											]
+										},
+										"description": "Enviar requisição DELETE assíncrona para deletar uma lista de lead específicos.\n\nStatus esperado:\n\n\\*   Status code: 204;\n\\*   String 'No content' no response code."
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "09aa78b8462d83d91bc816221f49380a9406dc2c",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "api_key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Requisições do tipo GET",
+					"if (pm.request.method == 'GET'){",
+					"",
+					"    pm.test(\"Status code is 200\", function () {",
+					"        pm.response.to.have.status(200);",
+					"    });",
+					"",
+					"    pm.test(\"Status code name has string\", function () {",
+					"        pm.response.to.have.status(\"OK\");",
+					"    });",
+					"",
+					"}",
+					"// Requisições do tipo GET e POST",
+					"if (pm.request.method == 'GET' || pm.request.method == 'POST'){",
+					"",
+					"    pm.test(\"Response time is less than 4000ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(4000);",
+					"    });",
+					"}",
+					"// Requisições do tipo POST",
+					"if (pm.request.method == 'POST'){",
+					"",
+					"    pm.test(\"Successful POST request\", function () {",
+					"        pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+					"    });",
+					"",
+					"    pm.test(\"Status code name has string\", function () {",
+					"        pm.response.to.have.status(\"Created\");",
+					"    });",
+					"    //Reutilizando o valor do id criado do lead e leadlist e introduzindo nas variáveis de ambiente ",
+					"   (pm.info.requestName == 'POST - Criar novo lead')",
+					"     pm.environment.set(\"idleads\",pm.response.json().data.id);",
+					"     ",
+					"   (pm.info.requestName == 'POST - Criando lista de lead')",
+					"        pm.environment.set(\"idleadlist\",pm.response.json().data.id);",
+					"",
+					"}",
+					"// Requisições do tipo PUT e DELETE ",
+					"if (pm.request.method == 'PUT' || pm.request.method == 'DELETE'){",
+					"",
+					"       pm.test(\"Status code name has string\", function () {",
+					"        pm.response.to.have.status(\"No Content\");",
+					"    }); ",
+					"    pm.test(\"Status code is 204\", function () {",
+					"            pm.response.to.have.status(204);",
+					"        });",
+					"}",
+					""
+				]
+			}
+		}
+	]
+}
